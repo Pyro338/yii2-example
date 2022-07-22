@@ -1,16 +1,29 @@
 <?php
 
-/* @var $this yii\web\View */
-
 use yii\helpers\Html;
+use yii\grid\GridView;
 
-$this->title = 'Записи';
+/* @var $this yii\web\View */
+/* @var $searchModel models\PostsSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title                   = Yii::t('app', 'Posts');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-comments">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="pages-index">
 
-    <p>
-        <?= "Здесь будет страница." ?>
-    </p>
+  <h1><?= Html::encode($this->title) ?></h1>
+  <p>
+      <?= Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => 'btn btn-success']) ?>
+  </p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel'  => $searchModel,
+        'columns'      => [
+            'id',
+            'title',
+            'description',
+            'timestamp'
+        ],
+    ]); ?>
 </div>
